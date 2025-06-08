@@ -1,0 +1,32 @@
+<div class="app-container">
+  <mat-toolbar color="primary" class="app-toolbar">
+    <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">{{ title }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button aria-label="Notifications">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Profile">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav 
+      #sidenav 
+      [opened]="sidenavOpened" 
+      mode="side" 
+      class="app-sidenav"
+      fixedInViewport="true">
+      <app-navigation></app-navigation>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

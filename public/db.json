@@ -1,0 +1,87 @@
+{
+    "accounts": [
+      {
+        "id": 1,
+        "accountNumber": "1234567890",
+        "accountType": "Savings",
+        "balance": 25000.00,
+        "currency": "USD",
+        "accountHolderName": "John Doe"
+      },
+      {
+        "id": 2,
+        "accountNumber": "0987654321",
+        "accountType": "Checking",
+        "balance": 8500.50,
+        "currency": "USD",
+        "accountHolderName": "John Doe"
+      },
+      {
+        "id": 3,
+        "accountNumber": "1122334455",
+        "accountType": "Credit",
+        "balance": -2300.25,
+        "currency": "USD",
+        "accountHolderName": "John Doe"
+      }
+    ],
+    "transactions": [
+      {
+        "id": 1,
+        "accountId": 1,
+        "type": "credit",
+        "amount": 5000,
+        "description": "Salary Deposit",
+        "date": "2024-06-01T10:30:00Z",
+        "category": "Income"
+      },
+      {
+        "id": 2,
+        "accountId": 1,
+        "type": "debit",
+        "amount": 1200,
+        "description": "Rent Payment",
+        "date": "2024-06-02T14:15:00Z",
+        "category": "Housing"
+      },
+      {
+        "id": 3,
+        "accountId": 2,
+        "type": "debit",
+        "amount": 250,
+        "description": "Grocery Shopping",
+        "date": "2024-06-03T16:45:00Z",
+        "category": "Food"
+      },
+      {
+        "id": 4,
+        "accountId": 1,
+        "type": "credit",
+        "amount": 200,
+        "description": "Cashback Reward",
+        "date": "2024-06-04T11:20:00Z",
+        "category": "Rewards"
+      },
+      {
+        "id": 5,
+        "accountId": 2,
+        "type": "debit",
+        "amount": 75,
+        "description": "ATM Withdrawal",
+        "date": "2024-06-05T09:10:00Z",
+        "category": "Cash"
+      }
+    ],
+    "user": {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@email.com",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "123 Main Street",
+        "city": "New York",
+        "state": "NY",
+        "zipCode": "10001"
+      }
+    }
+  }

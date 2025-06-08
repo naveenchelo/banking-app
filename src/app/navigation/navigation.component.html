@@ -1,0 +1,55 @@
+<div class="navigation-container">
+    <!-- User Profile Section -->
+    <div class="user-profile" >
+      <div class="user-avatar">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="user-info">
+        <h4 class="user-name">Naveen</h4>
+        <p class="user-email">naveen.chelo</p>
+      </div>
+    </div>
+  
+    <mat-divider></mat-divider>
+  
+    <!-- Navigation Menu -->
+    <nav class="navigation-menu">
+      <mat-nav-list>
+        <mat-list-item 
+          *ngFor="let item of menuItems" 
+          [class.active]="item.active"
+          (click)="navigateTo(item.route)"
+          class="menu-item">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+          <mat-icon 
+            matListItemMeta 
+            *ngIf="item.active" 
+            class="active-indicator">
+            chevron_right
+          </mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+    </nav>
+  
+    <mat-divider></mat-divider>
+  
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h5 class="section-title">Quick Actions</h5>
+      <mat-nav-list>
+        <mat-list-item class="action-item">
+          <mat-icon matListItemIcon color="primary">send</mat-icon>
+          <span matListItemTitle>Transfer Money</span>
+        </mat-list-item>
+        <mat-list-item class="action-item">
+          <mat-icon matListItemIcon color="primary">payment</mat-icon>
+          <span matListItemTitle>Pay Bills</span>
+        </mat-list-item>
+        <mat-list-item class="action-item">
+          <mat-icon matListItemIcon color="primary">request_quote</mat-icon>
+          <span matListItemTitle>Request Money</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
