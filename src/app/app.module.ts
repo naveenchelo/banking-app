@@ -23,9 +23,7 @@ import { StoreModule } from '@ngrx/store';
 import { BankingService } from './services/banking.services';
 import { BankingEffects } from './store/effect/banking.effects';
 import { BankingSandbox } from './sandbox/banking.sandbox';
-import { appReducers } from './app.reducers';
-
-
+import { bankingReducer } from './store/reducer/banking.reducers';
 
 @NgModule({
   declarations: [AppComponent, NavigationComponent, DashboardComponent],
@@ -42,14 +40,16 @@ import { appReducers } from './app.reducers';
     MatGridListModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([BankingEffects]),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('banking', bankingReducer), 
+    EffectsModule.forRoot([]), 
+    EffectsModule.forFeature([BankingEffects]), 
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
-    }),
+    })
   ],
-  providers: [BankingService,BankingSandbox],
+  providers: [BankingSandbox,BankingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,1 +1,106 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Loading Spinner -->
+  <div class="loading-overlay" *ngIf="loading$ | async">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-message" *ngIf="error$ | async as error">
+    <mat-icon>error</mat-icon>
+    <span>{{ error }}</span>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards" *ngIf="summary$ | async as summary">
+    <mat-card class="summary-card total-balance">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>account_balance</mat-icon>
+          <span>Total Balance</span>
+        </div>
+        <div class="card-amount">{{ formatCurrency(summary.totalBalance) }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card savings">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>savings</mat-icon>
+          <span>Savings</span>
+        </div>
+        <div class="card-amount">{{ formatCurrency(summary.savingsBalance) }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card checking">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span>Checking</span>
+        </div>
+        <div class="card-amount">{{ formatCurrency(summary.checkingBalance) }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card credit">
+      <mat-card-content>
+        <div class="card-header">
+          <mat-icon>credit_card</mat-icon>
+          <span>Credit</span>
+        </div>
+        <div class="card-amount">{{ formatCurrency(summary.creditBalance) }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Recent Transactions -->
+    <mat-card class="transactions-card">
+      <mat-card-header>
+        <mat-card-title>Recent Transactions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let transaction of recentTransactions$ | async">
+            <mat-icon matListItemIcon [style.color]="getTransactionColor(transaction.type)">
+              {{ getTransactionIcon(transaction.type) }}
+            </mat-icon>
+            <div matListItemTitle>{{ transaction.description }}</div>
+            <div matListItemLine>{{ transaction.date | date:'medium' }}</div>
+            <div matListItemMeta [style.color]="getTransactionColor(transaction.type)">
+              {{ formatCurrency(transaction.amount) }}
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Quick Actions -->
+    <mat-card class="quick-actions-card">
+      <mat-card-header>
+        <mat-card-title>Quick Actions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="quick-actions-grid">
+          <button mat-raised-button color="primary" class="action-button">
+            <mat-icon>send</mat-icon>
+            <span>Transfer Money</span>
+          </button>
+          <button mat-raised-button color="primary" class="action-button">
+            <mat-icon>payment</mat-icon>
+            <span>Pay Bills</span>
+          </button>
+          <button mat-raised-button color="primary" class="action-button">
+            <mat-icon>request_quote</mat-icon>
+            <span>Request Money</span>
+          </button>
+          <button mat-raised-button color="primary" class="action-button">
+            <mat-icon>account_balance</mat-icon>
+            <span>Open Account</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
