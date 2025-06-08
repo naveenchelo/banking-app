@@ -4,11 +4,14 @@
       <div class="user-avatar">
         <mat-icon>account_circle</mat-icon>
       </div>
+      <ng-container *ngIf="user$ | async as user">
       <div class="user-info">
-        <h4 class="user-name">Naveen</h4>
-        <p class="user-email">naveen.chelo</p>
+        <h4 class="user-name">{{ user.name }}</h4>
+        <p class="user-email">{{ user.name }}</p>
       </div>
+      </ng-container>
     </div>
+  
   
     <mat-divider></mat-divider>
   

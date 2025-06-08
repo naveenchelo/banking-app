@@ -16,14 +16,19 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { BankingService } from './services/banking.services';
+import { BankingEffects } from './store/effect/banking.effects';
+import { BankingSandbox } from './sandbox/banking.sandbox';
+import { appReducers } from './app.reducers';
+
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-    DashboardComponent
-  ],
+  declarations: [AppComponent, NavigationComponent, DashboardComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -37,9 +42,14 @@ import { StoreModule } from '@ngrx/store';
     MatGridListModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([BankingEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false,
+    }),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [BankingService,BankingSandbox],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
