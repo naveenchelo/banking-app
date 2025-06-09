@@ -1,0 +1,54 @@
+.app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .app-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
+  
+  .sidenav-container {
+    flex: 1;
+    margin-top: 64px; // Toolbar height
+  }
+  
+  .app-sidenav {
+    width: 250px;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .content-wrapper {
+    padding: 20px;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  // Full-screen container for auth routes
+  .auth-container {
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .app-sidenav {
+      width: 200px;
+    }
+    
+    .content-wrapper {
+      padding: 15px;
+    }
+  }

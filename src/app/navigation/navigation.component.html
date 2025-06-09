@@ -1,4 +1,4 @@
-<div class="navigation-container">
+<div class="navigation-container" *ngIf="showNavigation" class="navigation">
     <!-- User Profile Section -->
     <div class="user-profile" >
       <div class="user-avatar">
@@ -16,7 +16,7 @@
     <mat-divider></mat-divider>
   
     <!-- Navigation Menu -->
-    <nav class="navigation-menu">
+    <nav class="navigation-menu" >
       <mat-nav-list>
         <mat-list-item 
           *ngFor="let item of menuItems" 

@@ -4,6 +4,21 @@ import { BankingState } from '../../model/banking.model';
 export const selectBankingState =
   createFeatureSelector<BankingState>('banking');
 
+export const selectTransfers = createSelector(
+  selectBankingState,
+  (state) => state.transfers
+);
+
+export const selectTransferLoading = createSelector(
+  selectBankingState,
+  (state) => state.loading
+);
+
+export const selectTransferError = createSelector(
+  selectBankingState,
+  (state) => state.error
+);
+
 // Basic selectors
 export const selectAccounts = createSelector(
   selectBankingState,

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { forkJoin, map, Observable } from "rxjs";
-import { Account, BankingSummary, Transaction, User } from "../model/banking.model";
+import { Account, BankingSummary, Transaction, TransferMoney, User } from "../model/banking.model";
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +60,16 @@ export class BankingService {
         };
       })
     );
+  }
+
+  makeTransfer(transfer: TransferMoney): Observable<TransferMoney> {
+    return this.http.post<TransferMoney>(`${this.API_URL}/transactions`, {
+      ...transfer,
+      date: new Date().toISOString(),
+      status: 'completed',
+      type: 'transfer',
+      category: 'Transfer',
+    });
   }
 
   getAccountById(id: number): Observable<Account> {

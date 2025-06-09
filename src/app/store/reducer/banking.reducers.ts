@@ -9,6 +9,7 @@ export const initialState: BankingState = {
   summary: null,
   loading: false,
   error: null,
+  transfers: [],
 };
 
 export const bankingReducer = createReducer(
@@ -27,6 +28,26 @@ export const bankingReducer = createReducer(
     error: null,
   })),
   on(BankingActions.loadBankingSummaryFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  // Transfer Money
+  on(BankingActions.initiateTransfer, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+
+  on(BankingActions.transferSuccess, (state, { transfer }) => ({
+    ...state,
+    transfers: [transfer, ...state.transfers],
+    loading: false,
+    error: null,
+  })),
+
+  on(BankingActions.transferFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,

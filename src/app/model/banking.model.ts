@@ -46,4 +46,16 @@ export interface Account {
     summary: BankingSummary | null;
     loading: boolean;
     error: string | null;
+    transfers: TransferMoney[];
+  }
+
+  export interface TransferMoney {
+    recipientName: string;
+    accountNumber: string;
+    ifscCode: string;
+    amount: number;
+    date: string;
+    status: 'pending' | 'completed' | 'failed';
+    type: 'transfer';
+    category: 'Transfer';
   }

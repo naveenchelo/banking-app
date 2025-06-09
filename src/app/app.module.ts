@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,11 +25,20 @@ import { BankingService } from './services/banking.services';
 import { BankingEffects } from './store/effect/banking.effects';
 import { BankingSandbox } from './sandbox/banking.sandbox';
 import { bankingReducer } from './store/reducer/banking.reducers';
+import { TransferMoneyComponent } from './transfer-money/transfer-money.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, DashboardComponent],
+  declarations: [
+    AppComponent, 
+    NavigationComponent, 
+    DashboardComponent,
+    TransferMoneyComponent
+  ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule, // Added this - required for Angular Material
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -49,7 +59,7 @@ import { bankingReducer } from './store/reducer/banking.reducers';
       logOnly: false,
     })
   ],
-  providers: [BankingSandbox,BankingService],
+  providers: [BankingSandbox, BankingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

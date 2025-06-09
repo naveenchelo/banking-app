@@ -3,6 +3,7 @@ import {
   Account,
   BankingSummary,
   Transaction,
+  TransferMoney,
   User,
 } from '../../model/banking.model';
 
@@ -62,6 +63,21 @@ export const loadAccountByIdSuccess = createAction(
 );
 export const loadAccountByIdFailure = createAction(
   '[Banking] Load Account By ID Failure',
+  props<{ error: string }>()
+);
+
+export const initiateTransfer = createAction(
+  '[Transfer] Initiate Transfer',
+  props<{ transfer: TransferMoney }>()
+);
+
+export const transferSuccess = createAction(
+  '[Transfer] Transfer Success',
+  props<{ transfer: TransferMoney }>()
+);
+
+export const transferFailure = createAction(
+  '[Transfer] Transfer Failure',
   props<{ error: string }>()
 );
 

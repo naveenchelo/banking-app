@@ -1,0 +1,67 @@
+<div class="transfer-container">
+  <div class="transfer-form">
+    <h2>Transfer Money</h2>
+    <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="recipientName">Recipient Name</label>
+        <input 
+          type="text" 
+          id="recipientName" 
+          formControlName="recipientName"
+          placeholder="Enter recipient's full name"
+          [ngClass]="{'error': transferForm.get('recipientName')?.invalid && transferForm.get('recipientName')?.touched}"
+        >
+        <div class="error-message" *ngIf="transferForm.get('recipientName')?.invalid && transferForm.get('recipientName')?.touched">
+          Please enter a valid name (minimum 3 characters)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="accountNumber">Account Number</label>
+        <input 
+          type="text" 
+          id="accountNumber" 
+          formControlName="accountNumber"
+          placeholder="Enter account number"
+          [ngClass]="{'error': transferForm.get('accountNumber')?.invalid && transferForm.get('accountNumber')?.touched}"
+        >
+        <div class="error-message" *ngIf="transferForm.get('accountNumber')?.invalid && transferForm.get('accountNumber')?.touched">
+          Please enter a valid account number (10-16 digits)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ifscCode">IFSC Code</label>
+        <input 
+          type="text" 
+          id="ifscCode" 
+          formControlName="ifscCode"
+          placeholder="Enter IFSC code"
+          [ngClass]="{'error': transferForm.get('ifscCode')?.invalid && transferForm.get('ifscCode')?.touched}"
+        >
+        <div class="error-message" *ngIf="transferForm.get('ifscCode')?.invalid && transferForm.get('ifscCode')?.touched">
+          Please enter a valid IFSC code (e.g., SBIN0001234)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input 
+          type="number" 
+          id="amount" 
+          formControlName="amount"
+          placeholder="Enter amount"
+          [ngClass]="{'error': transferForm.get('amount')?.invalid && transferForm.get('amount')?.touched}"
+        >
+        <div class="error-message" *ngIf="transferForm.get('amount')?.invalid && transferForm.get('amount')?.touched">
+          Please enter a valid amount (minimum 1)
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="submit-btn" [disabled]="!transferForm.valid">Send Money</button>
+      </div>
+    </form>
+  </div>
+</div>

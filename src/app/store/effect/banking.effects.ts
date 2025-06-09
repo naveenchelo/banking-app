@@ -13,6 +13,7 @@ export class BankingEffects {
   loadTransactions$;
   loadUser$;
   loadAccountById$;
+  transferMoney$;
 
   constructor(
     private actions$: Actions,
@@ -37,6 +38,24 @@ export class BankingEffects {
             )
           )
         )
+      )
+    );
+
+    this.transferMoney$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(BankingActions.initiateTransfer),
+        mergeMap(({ transfer }) => {
+          return this.bankingService.makeTransfer(transfer).pipe(
+            map(() => BankingActions.transferSuccess({ transfer })),
+            catchError((error) =>
+              of(
+                BankingActions.transferFailure({
+                  error: error.message || 'Transfer failed',
+                })
+              )
+            )
+          );
+        })
       )
     );
 

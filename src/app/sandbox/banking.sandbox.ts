@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { BankingState, Account, Transaction, User, BankingSummary } from '../model/banking.model';
+import {
+  BankingState,
+  Account,
+  Transaction,
+  User,
+  BankingSummary,
+  TransferMoney,
+} from '../model/banking.model';
 import * as BankingActions from '../store/actions/banking.actions';
 import * as BankingSelectors from '../store/selector/banking.selectors';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BankingSandbox {
-
   // Observables
   public accounts$: Observable<Account[]>;
   public transactions$: Observable<Transaction[]>;
@@ -21,17 +26,33 @@ export class BankingSandbox {
   public accountsByType$: Observable<{ [key: string]: Account[] }>;
   public recentTransactions$: Observable<Transaction[]>;
   public totalBalance$: Observable<number>;
+  public transfers$: Observable<TransferMoney[]>;
+  public loadingTransfer$: Observable<boolean>;
+  public errorTransfer$: Observable<string | null>;
 
   constructor(private store: Store<BankingState>) {
     this.accounts$ = this.store.select(BankingSelectors.selectAccounts);
     this.transactions$ = this.store.select(BankingSelectors.selectTransactions);
     this.user$ = this.store.select(BankingSelectors.selectUser);
-    this.bankingSummary$ = this.store.select(BankingSelectors.selectBankingSummary);
+    this.bankingSummary$ = this.store.select(
+      BankingSelectors.selectBankingSummary
+    );
     this.loading$ = this.store.select(BankingSelectors.selectLoading);
     this.error$ = this.store.select(BankingSelectors.selectError);
-    this.accountsByType$ = this.store.select(BankingSelectors.selectAccountsByType);
-    this.recentTransactions$ = this.store.select(BankingSelectors.selectRecentTransactions);
+    this.accountsByType$ = this.store.select(
+      BankingSelectors.selectAccountsByType
+    );
+    this.recentTransactions$ = this.store.select(
+      BankingSelectors.selectRecentTransactions
+    );
     this.totalBalance$ = this.store.select(BankingSelectors.selectTotalBalance);
+    this.transfers$ = this.store.select(BankingSelectors.selectTransfers);
+    this.loadingTransfer$ = this.store.select(
+      BankingSelectors.selectTransferLoading
+    );
+    this.errorTransfer$ = this.store.select(
+      BankingSelectors.selectTransferError
+    );
   }
 
   // Action dispatchers
@@ -65,6 +86,12 @@ export class BankingSandbox {
   }
 
   getTransactionsByAccountId(accountId: number): Observable<Transaction[]> {
-    return this.store.select(BankingSelectors.selectTransactionsByAccountId(accountId));
+    return this.store.select(
+      BankingSelectors.selectTransactionsByAccountId(accountId)
+    );
+  }
+
+  initiateTransfer(transfer: TransferMoney): void {
+    this.store.dispatch(BankingActions.initiateTransfer({ transfer }));
   }
 }
